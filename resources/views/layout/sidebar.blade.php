@@ -33,35 +33,27 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="{{ asset('') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>Home</p>
             </a>
           </li>
+          @foreach ($data_menu as $category)
           <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>Administrasi<i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ asset('') }}user" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>User Maintenance</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ubah Password</p>
-                </a>
-              </li>
-            </ul>
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>{{ $category->namamenu }}<i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+              @foreach ($category->childrenCategories as $childCategory)
+                  @include('layout.child_category', ['child_category' => $childCategory])
+              @endforeach
+              </ul>
           </li>
+          @endforeach
+         
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
